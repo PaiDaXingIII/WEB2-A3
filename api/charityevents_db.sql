@@ -203,3 +203,30 @@ VALUES
     2,
     4
 );
+
+
+-- 创建活动注册表
+CREATE TABLE event_registrations (
+  registration_id INT AUTO_INCREMENT PRIMARY KEY,
+  event_id INT NOT NULL,
+  full_name VARCHAR(100) NOT NULL,
+  email VARCHAR(100) NOT NULL,
+  phone VARCHAR(20) NOT NULL,
+  ticket_quantity INT NOT NULL CHECK (ticket_quantity > 0),
+  registration_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (event_id) REFERENCES charity_events(event_id) ON DELETE RESTRICT
+);
+
+-- 添加10条初始注册数据示例
+INSERT INTO event_registrations (event_id, full_name, email, phone, ticket_quantity) VALUES
+(1, 'John Doe', 'john@example.com', '123-456-7890', 2),
+(1, 'Jane Smith', 'jane@example.com', '098-765-4321', 1),
+(2, 'Bob Johnson', 'bob@example.com', '555-123-4567', 3),
+(3, 'Alice Williams', 'alice@example.com', '555-765-4321', 1),
+(2, 'Charlie Brown', 'charlie@example.com', '555-987-6543', 2),
+(4, 'Diana Prince', 'diana@example.com', '555-456-7890', 1),
+(5, 'Clark Kent', 'clark@example.com', '555-321-6540', 2),
+(3, 'Bruce Wayne', 'bruce@example.com', '555-876-5432', 4),
+(6, 'Peter Parker', 'peter@example.com', '555-234-5678', 1),
+(4, 'Mary Jane', 'mary@example.com', '555-654-3210', 2);
+
