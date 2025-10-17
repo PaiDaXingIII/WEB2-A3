@@ -15,4 +15,16 @@ router.get('/search', eventController.searchEvents);
 // 4. 活动详情接口：根据ID获取单个活动完整信息
 router.get('/:eventId', eventController.getEventById);
 
+// 5. 创建新活动
+router.post('/', eventController.createEvent);
+
+// 6. 更新活动
+router.put('/:eventId', eventController.updateEvent);
+
+// 7. 删除活动
+router.delete('/:eventId', eventController.deleteEvent);
+
+// 8. 创建活动注册
+router.post('/:eventId/register', eventController.createRegistration);
+
 module.exports = router;
