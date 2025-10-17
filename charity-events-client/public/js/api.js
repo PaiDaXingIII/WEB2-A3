@@ -48,3 +48,21 @@ const api = {
     return response.json();
   }
 };
+
+// 添加活动注册
+registerForEvent: async (registrationData) => {
+  const response = await fetch(`${API_BASE_URL}/${registrationData.event_id}/register`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(registrationData)
+  });
+  
+  if (!response.ok) {
+    const errorData = await response.json();
+    throw new Error(errorData.error || 'Registration failed');
+  }
+  
+  return response.json();
+}

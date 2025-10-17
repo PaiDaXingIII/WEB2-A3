@@ -71,3 +71,39 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
   });
 });
+
+  let registrationsHtml = '';
+  if (event.registrations && event.registrations.length > 0) {
+    registrationsHtml = `
+      <div class="registrations">
+        <h3>Event Registrations (${event.registrations.length})</h3>
+        <table class="registrations-table">
+          <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Tickets</th>
+            <th>Registered On</th>
+          </tr>
+          ${event.registrations.map(reg => `
+            <tr>
+              <td>${reg.full_name}</td>
+              <td>${reg.email}</td>
+              <td>${reg.phone}</td>
+              <td>${reg.ticket_quantity}</td>
+              <td>${new Date(reg.registration_date).toLocaleString()}</td>
+            </tr>
+          `).join('')}
+        </table>
+      </div>
+    `;
+  } else {
+    registrationsHtml = '<p>No registrations yet for this event.</p >';
+  }
+
+  eventDetailContainer.innerHTML += registrationsHtml;
+  
+  // 更新注册按钮链接
+  document.getElementById('register-btn').addEventListener('click', () => {
+    window.location.href = `register.html?eventId=${event.event_id}`;
+  });
